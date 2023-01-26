@@ -10,7 +10,7 @@ import ServiceOrders from "./pages/services_orders/service_orders";
 
 function App() {
   return (
-    <div className="h-screen bg-[#0a191e]">
+    <div className="bg-[#0a191e]">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
