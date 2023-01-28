@@ -1,15 +1,10 @@
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
-import { switch_client_list_view } from "../../../redux/admin/admin";
-
-type ClientsItemProps = {
+type InfoItemProps = {
   title: string;
   quantity: number;
+  action: any;
 };
 
-const ClientsItem = ({ title, quantity }: ClientsItemProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-
+const InfoItem = ({ title, quantity, action }: InfoItemProps) => {
   return (
     <div className="self-center w-full p-2 bg-[#4b9978] text-center text-[#0a191e] text-2xl rounded-xl">
       <h3 className="font-bold">{title}</h3>
@@ -17,7 +12,7 @@ const ClientsItem = ({ title, quantity }: ClientsItemProps) => {
         {quantity}
       </h1>
       <button
-        onClick={() => dispatch(switch_client_list_view())}
+        onClick={action}
         className="bg-[#0a191e] text-white active:opacity-80 px-2 py-1 rounded-xl mt-2"
       >
         Ver lista
@@ -26,4 +21,4 @@ const ClientsItem = ({ title, quantity }: ClientsItemProps) => {
   );
 };
 
-export default ClientsItem;
+export default InfoItem;
