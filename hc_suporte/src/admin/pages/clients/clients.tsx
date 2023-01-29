@@ -5,6 +5,7 @@ import { switch_client_list_view } from "../../../redux/admin/admin";
 import InfoItem from "../../components/info_item/info_item.component";
 import ItemList from "../../components/item_list/item_list.component";
 import ClientItem from "../../components/client_item/client_item.component";
+import AdminMenu from "../../components/admin_menu/admin_menu.component";
 
 const Clients = () => {
   const list_view_hidden = useSelector(
@@ -13,6 +14,7 @@ const Clients = () => {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="min-h-full h-screen p-2">
+      <AdminMenu />
       {list_view_hidden ? (
         ""
       ) : (
