@@ -6,15 +6,21 @@ import InfoItem from "../../components/info_item/info_item.component";
 import ItemList from "../../components/item_list/item_list.component";
 import ClientItem from "../../components/client_item/client_item.component";
 import AdminMenu from "../../components/admin_menu/admin_menu.component";
+import ClientInfo from "../../components/client_info/client_info.component";
 
 const Clients = () => {
   const list_view_hidden = useSelector(
     (state: RootState) => state.admin.client_list_hidden
   );
+  const client_info_hidden = useSelector(
+    (state: RootState) => state.admin.client_info_hidden
+  );
   const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="min-h-full h-screen p-2">
       <AdminMenu />
+      {client_info_hidden ? "" : <ClientInfo />}
+
       {list_view_hidden ? (
         ""
       ) : (
