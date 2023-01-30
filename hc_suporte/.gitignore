@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# Enviropment
+.env
+
 # Custom Notes
 notas.txt
