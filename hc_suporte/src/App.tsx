@@ -16,7 +16,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/logar" element={<SignInAndSignUp />} />
+          <Route path="/logar" element={<SignInAndSignUp signIn={true} />} />
+          <Route
+            path="/criar_conta"
+            element={<SignInAndSignUp signIn={false} />}
+          />
           <Route path="/registrar" element={<RegisterCellphone />} />
           <Route path="/problema" element={<Problem />} />
           <Route path="/ordem_servicos" element={<ServiceOrders />} />
