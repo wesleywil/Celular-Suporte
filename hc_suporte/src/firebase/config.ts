@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
-import { getFirestore, collection, doc, getDocs, getDoc, setDoc } from "firebase/firestore/lite";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore/lite";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -36,15 +36,36 @@ export const handleSignUp = async(data:any) =>{
             ...data
         })
     }catch(error:any){
-        console.log('ERROR => ', error.message);
+        console.log('CODE: ', error.code + " MESSAGE: ", error.message);
     }
 }
 
+export const handleSignIn = async(data:any)=>{
+    try{
+        const result = await signInWithEmailAndPassword(auth, data.email, data.password)
+        console.log('usuario logado é => ', result.user)
+    }catch(error:any){
+        console.log('CODE: ', error.code + " MESSAGE: ", error.message); 
+    }
+    
+}
+
+export const handleLogout = async()=>{
+    signOut(auth).then(()=>{
+        console.log("Signed out successfully")
+    }).catch((error:any)=>{
+        console.log('CODE: ', error.code + " MESSAGE: ", error.message); 
+    })
+}
+
 // export const getCurrentUser = ()=>{
-//     return new Promise((resolve, reject)=>{
-//         const unsubscribe = auth.onAuthStateChanged(userAuth =>{
-//             unsubscribe();
-//             resolve(userAuth);
-//         }, reject)
+//     onAuthStateChanged(auth, (user)=>{
+//         if(user){
+//             const uid = user.uid;
+//             console.log('uid=> ', user)
+//             return uid
+//         }else{
+//             console.log('user is logged out')
+//         }
 //     })
 // }
