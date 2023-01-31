@@ -1,10 +1,34 @@
 import FormButton from "../form_button/form_button.component";
+import { handleSignIn } from "../../firebase/config";
+
+interface CustomElements extends HTMLFormControlsCollection {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+}
+
+interface CustomForm extends HTMLFormElement {
+  readonly elements: CustomElements;
+}
 
 const SignIn = () => {
+  const handleSubmit = (e: React.FormEvent<CustomForm>) => {
+    e.preventDefault();
+    console.log("Loging...");
+    const target = e.currentTarget.elements;
+
+    const data = {
+      email: target.email.value,
+      password: target.password.value,
+    };
+    handleSignIn(data);
+  };
   return (
     <div className="self-center mt-2 p-4 text-3xl text-[#d9b55d]">
       <h1 className="mb-2 text-center">Login</h1>
-      <form className="flex flex-col gap-2 text-2xl text-black">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 text-2xl text-black"
+      >
         <input
           type="email"
           name="email"
