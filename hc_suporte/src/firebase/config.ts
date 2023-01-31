@@ -32,7 +32,8 @@ export const handleSignUp = async(data:any) =>{
         await setDoc(userRef, {
             displayName:data.displayName,
             email:result.user.email,
-            uid:result.user.uid
+            uid:result.user.uid,
+            ...data
         })
     }catch(error:any){
         console.log('ERROR => ', error.message);

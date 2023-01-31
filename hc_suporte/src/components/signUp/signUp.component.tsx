@@ -6,6 +6,12 @@ interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
   password2: HTMLInputElement;
+  cellphone: HTMLInputElement;
+  address: HTMLInputElement;
+  district: HTMLInputElement;
+  city: HTMLInputElement;
+  state: HTMLInputElement;
+  zip_code: HTMLInputElement;
 }
 
 interface CustomForm extends HTMLFormElement {
@@ -28,6 +34,12 @@ const SignUp = () => {
         displayName: target.displayName.value,
         email: target.email.value,
         password: target.password.value,
+        cellphone: target.cellphone.value,
+        address: target.address.value,
+        district: target.district.value,
+        city: target.city.value,
+        state: target.state.value,
+        zip_code: target.zip_code.value,
       };
       handleSignUp(data);
       navigate("/");
@@ -40,30 +52,71 @@ const SignUp = () => {
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 text-2xl text-black"
       >
-        <input
-          type="text"
-          name="displayName"
-          placeholder="Nome"
-          className="rounded-xl px-2"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="E-mail"
-          className="rounded-xl px-2"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          className="rounded-xl px-2"
-        />
-        <input
-          type="password"
-          name="password2"
-          placeholder="Confirmar Senha"
-          className="rounded-xl px-2"
-        />
+        <div className="flex flex-col gap-2 p-2 border rounded-xl">
+          <input
+            type="text"
+            name="displayName"
+            placeholder="Nome"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Senha"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="password"
+            name="password2"
+            placeholder="Confirmar Senha"
+            className="rounded-xl px-2"
+          />
+        </div>
+        <div className="flex flex-col gap-2 p-2 border rounded-xl">
+          <input
+            type="tel"
+            name="cellphone"
+            placeholder="Celular para contato"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="text"
+            name="address"
+            placeholder="Endereço com numero"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="text"
+            name="district"
+            placeholder="Bairro"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="text"
+            name="city"
+            placeholder="Cidade"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="text"
+            name="state"
+            placeholder="Estado"
+            className="rounded-xl px-2"
+          />
+          <input
+            type="text"
+            name="zip_code"
+            placeholder="CEP"
+            className="rounded-xl px-2"
+          />
+        </div>
+
         <div className="flex gap-2 justify-center mt-2">
           <FormButton name="Criar" type="submit" />
           <FormButton name="Cancelar" type="button" />
