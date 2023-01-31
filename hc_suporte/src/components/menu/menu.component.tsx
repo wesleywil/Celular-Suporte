@@ -2,8 +2,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Menu = () => {
-  const navigate = useNavigate();
-
   const handleMenu = () => {
     var x = document.getElementById("myLinks");
     if (x?.style.display === "block") {
@@ -26,6 +24,12 @@ const Menu = () => {
         <Link to="/registrar">Registrar</Link>
         <Link to="/problema">Problema</Link>
         <Link to="/ordem_servicos">Order de Serviços</Link>
+        <div className="border m-1 rounded-xl">
+          <Link to="/logar" className="border-b">
+            Logar
+          </Link>
+          <Link to="/criar_conta">Nova Conta</Link>
+        </div>
       </div>
     </div>
   );
