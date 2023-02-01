@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "./redux/store";
+import { set_user_id } from "./redux/account/account";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+// Styles
 import "./App.css";
 
 // Pages
@@ -11,6 +18,18 @@ import Clients from "./admin/pages/clients/clients";
 import Services from "./admin/pages/services/services";
 
 function App() {
+  const auth = getAuth();
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("USER ID =>", user.uid);
+        dispatch(set_user_id(user.uid));
+      } else {
+        console.log("user is logged out");
+      }
+    });
+  }, [auth]);
   return (
     <div className="bg-[#0a191e]">
       <BrowserRouter>
