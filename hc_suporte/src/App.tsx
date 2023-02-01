@@ -17,6 +17,9 @@ import ServiceOrders from "./pages/services_orders/service_orders";
 import Clients from "./admin/pages/clients/clients";
 import Services from "./admin/pages/services/services";
 
+// Components
+import WithAuthentication from "./components/withAuthentication/withAuthentication.component";
+
 function App() {
   const auth = getAuth();
   const dispatch = useDispatch<AppDispatch>();
@@ -40,9 +43,15 @@ function App() {
             path="/criar_conta"
             element={<SignInAndSignUp signIn={false} />}
           />
-          <Route path="/registrar" element={<RegisterCellphone />} />
-          <Route path="/problema" element={<Problem />} />
-          <Route path="/ordem_servicos" element={<ServiceOrders />} />
+          <Route
+            path="/registrar"
+            element={WithAuthentication(RegisterCellphone)}
+          />
+          <Route path="/problema" element={WithAuthentication(Problem)} />
+          <Route
+            path="/ordem_servicos"
+            element={WithAuthentication(ServiceOrders)}
+          />
           <Route path="/admin/clientes" element={<Clients />} />
           <Route path="/admin/servicos" element={<Services />} />
         </Routes>

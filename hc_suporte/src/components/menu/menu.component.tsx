@@ -1,7 +1,21 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState, AppDispatch } from "../../redux/store";
+import { clean_user_id } from "../../redux/account/account";
+import { Link } from "react-router-dom";
+import { handleLogout } from "../../firebase/config";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Menu = () => {
+  const user_id = useSelector((state: RootState) => state.account.user_id);
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    console.log("MENUUSER ID=> ", user_id);
+  }, [user_id]);
+  const logout = () => {
+    dispatch(clean_user_id());
+    handleLogout();
+  };
   const handleMenu = () => {
     var x = document.getElementById("myLinks");
     if (x?.style.display === "block") {
@@ -25,10 +39,18 @@ const Menu = () => {
         <Link to="/problema">Problema</Link>
         <Link to="/ordem_servicos">Order de Serviços</Link>
         <div className="border m-1 rounded-xl">
-          <Link to="/logar" className="border-b">
-            Logar
-          </Link>
-          <Link to="/criar_conta">Nova Conta</Link>
+          {user_id === "" ? (
+            <>
+              <Link to="/logar" className="border-b">
+                Logar
+              </Link>
+              <Link to="/criar_conta">Nova Conta</Link>
+            </>
+          ) : (
+            <a onClick={logout} className="border-b">
+              Logout
+            </a>
+          )}
         </div>
       </div>
     </div>
