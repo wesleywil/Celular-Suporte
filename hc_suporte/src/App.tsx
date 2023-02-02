@@ -19,6 +19,7 @@ import Services from "./admin/pages/services/services";
 
 // Components
 import WithAuthentication from "./components/withAuthentication/withAuthentication.component";
+import NotFound from "./pages/not_found/not_found";
 
 function App() {
   const auth = getAuth();
@@ -54,6 +55,7 @@ function App() {
           />
           <Route path="/admin/clientes" element={<Clients />} />
           <Route path="/admin/servicos" element={<Services />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
