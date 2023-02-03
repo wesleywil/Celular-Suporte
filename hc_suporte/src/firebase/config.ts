@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore/lite";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore/lite";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -57,7 +57,17 @@ export const handleLogout = async()=>{
         console.log('CODE: ', error.code + " MESSAGE: ", error.message); 
     })
 }
+export const getUserInfo = async(uid:string)=>{
+    const docRef = doc(db, `users/${uid}`)
+    const docSnap = await getDoc(docRef);
 
+    if(docSnap.exists()){
+        
+        return docSnap.data()
+    }else{
+        console.log('User not found')
+    }
+}
 // export const getCurrentUser = ()=>{
 //     onAuthStateChanged(auth, (user)=>{
 //         if(user){
