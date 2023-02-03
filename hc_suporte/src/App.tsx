@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "./redux/store";
-import { set_user_id } from "./redux/account/account";
+import { set_user_id, set_admin } from "./redux/account/account";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getUserInfo } from "./firebase/config";
 
 // Styles
 import "./App.css";
@@ -19,6 +20,7 @@ import Services from "./admin/pages/services/services";
 
 // Components
 import WithAuthentication from "./components/withAuthentication/withAuthentication.component";
+import WithAuthenticationAdmin from "./admin/components/withAuthenticationAdmin/withAuthenticationAdmin.component";
 import NotFound from "./pages/not_found/not_found";
 
 function App() {
@@ -29,6 +31,10 @@ function App() {
       if (user) {
         console.log("USER ID =>", user.uid);
         dispatch(set_user_id(user.uid));
+        getUserInfo(user.uid).then((data) => {
+          console.log("ADMIN ==> ", data?.admin);
+          dispatch(set_admin(JSON.stringify(data!.admin)));
+        });
       } else {
         console.log("user is logged out");
       }
@@ -53,8 +59,14 @@ function App() {
             path="/ordem_servicos"
             element={WithAuthentication(ServiceOrders)}
           />
-          <Route path="/admin/clientes" element={<Clients />} />
-          <Route path="/admin/servicos" element={<Services />} />
+          <Route
+            path="/admin/clientes"
+            element={WithAuthenticationAdmin(Clients)}
+          />
+          <Route
+            path="/admin/servicos"
+            element={WithAuthenticationAdmin(Services)}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
