@@ -1,5 +1,5 @@
 import FormButton from "../form_button/form_button.component";
-import { handleSignIn } from "../../firebase/config";
+import { handleSignIn } from "../../firebase/user/user_config";
 
 interface CustomElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;

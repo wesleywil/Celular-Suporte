@@ -1,28 +1,11 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore/lite";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyA8f7ZKMJDhr---F3wdvxJQsleHVQuhKRI",
-    authDomain: "hc-suporte.firebaseapp.com",
-    projectId: "hc-suporte",
-    storageBucket: "hc-suporte.appspot.com",
-    messagingSenderId: "430710885800",
-    appId: "1:430710885800:web:a507705e795890ac64e19d",
-    measurementId: "G-RP980QZ6JX"
-  };
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore/lite";
 
+import { db } from "../firebase.utils";
+import { auth } from "../firebase.utils";
 
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth();
 
 export const handleSignUp = async(data:any) =>{
     try{
@@ -68,14 +51,4 @@ export const getUserInfo = async(uid:string)=>{
         console.log('User not found')
     }
 }
-// export const getCurrentUser = ()=>{
-//     onAuthStateChanged(auth, (user)=>{
-//         if(user){
-//             const uid = user.uid;
-//             console.log('uid=> ', user)
-//             return uid
-//         }else{
-//             console.log('user is logged out')
-//         }
-//     })
-// }
+

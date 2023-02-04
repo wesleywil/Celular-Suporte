@@ -4,7 +4,7 @@ import type { AppDispatch } from "./redux/store";
 import { set_user_id, set_admin } from "./redux/account/account";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getUserInfo } from "./firebase/config";
+import { getUserInfo } from "./firebase/user/user_config";
 
 // Styles
 import "./App.css";

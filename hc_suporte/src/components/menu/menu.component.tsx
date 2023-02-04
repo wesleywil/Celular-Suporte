@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../redux/store";
 import { clean_user_id } from "../../redux/account/account";
 import { Link } from "react-router-dom";
-import { handleLogout } from "../../firebase/config";
+import { handleLogout } from "../../firebase/user/user_config";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Menu = () => {

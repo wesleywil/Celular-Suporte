@@ -18,7 +18,7 @@ interface CustomForm extends HTMLFormElement {
   readonly elements: CustomElements;
 }
 
-import { handleSignUp } from "../../firebase/config";
+import { handleSignUp } from "../../firebase/user/user_config";
 
 const SignUp = () => {
   const navigate = useNavigate();
