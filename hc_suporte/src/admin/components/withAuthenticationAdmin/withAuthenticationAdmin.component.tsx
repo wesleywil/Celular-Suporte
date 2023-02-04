@@ -2,6 +2,7 @@ import { useEffect, ComponentType } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
 import { Navigate } from "react-router-dom";
+import Loading from "../loading/loading.component";
 
 function WithAuthenticationAdmin<T>(
   Component: ComponentType<T>,
@@ -14,7 +15,14 @@ function WithAuthenticationAdmin<T>(
   }, [user_id, admin]);
   if (admin === "idle") {
     return (
-      <h1 className="h-screen w-screen text-white text-4xl">Loading...</h1>
+      <div className="h-screen">
+        <div className="h-full flex flex-col items-center justify-center">
+          <div className="self-center">
+            <Loading />
+          </div>
+          <h1 className="text-white">Carregando...</h1>
+        </div>
+      </div>
     );
   } else {
     if (user_id !== "" && admin === "true") {
