@@ -1,8 +1,48 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
+import { registerCellphone } from "../../firebase/cellphone/cellphone_config";
+
 import FormButton from "../form_button/form_button.component";
 
+interface CustomElements extends HTMLFormControlsCollection {
+  brand: HTMLInputElement;
+  model: HTMLInputElement;
+  color: HTMLInputElement;
+  uid: HTMLInputElement;
+}
+
+interface CustomForm extends HTMLFormElement {
+  readonly elements: CustomElements;
+}
+
 const FormCellphone = () => {
+  const navigate = useNavigate();
+  const user_id = useSelector((state: RootState) => state.account.user_id);
+
+  useEffect(() => {}, [user_id]);
+
+  const handleSubmit = (e: React.FormEvent<CustomForm>) => {
+    e.preventDefault();
+    console.log("Creating new cellphone register");
+    const target = e.currentTarget.elements;
+
+    const data = {
+      brand: target.brand.value,
+      model: target.model.value,
+      color: target.color.value,
+      uid: user_id,
+    };
+    registerCellphone(data);
+    navigate("/");
+  };
+
   return (
-    <form className="flex flex-col gap-2 text-2xl text-black">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-2 text-2xl text-black"
+    >
       <label className="text-xl text-[#d9b55d]">Marca</label>
       <input
         type="text"
