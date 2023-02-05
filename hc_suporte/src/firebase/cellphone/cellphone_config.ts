@@ -1,4 +1,4 @@
-import { addDoc, collection, query, where } from "firebase/firestore/lite";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore/lite";
 
 import { db } from "../firebase.utils";
 
@@ -18,7 +18,12 @@ export const registerCellphone = async(data:any)=>{
 }
 
 export const listCellphonesByUserId = async(uid:string)=>{
-    const celRef = collection(db, "cellphones");
+    const celRef =  collection(db, "cellphones");
     const q = query(celRef, where("uid", "==", uid));
-    return q;
+    const querySnapshot = await getDocs(q)
+    let data:any = [];
+    querySnapshot.forEach((doc)=>{
+        data.push(doc.data())
+    })
+    return data;
 }
