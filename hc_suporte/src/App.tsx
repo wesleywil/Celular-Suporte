@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "./redux/store";
-import { set_user_id, set_admin } from "./redux/account/account";
+import { set_user_id, set_user } from "./redux/account/account";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getUserInfo } from "./firebase/user/user_config";
@@ -33,7 +33,7 @@ function App() {
         dispatch(set_user_id(user.uid));
         getUserInfo(user.uid).then((data) => {
           console.log("ADMIN ==> ", data?.admin);
-          dispatch(set_admin(JSON.stringify(data!.admin)));
+          dispatch(set_user(data));
         });
       } else {
         console.log("user is logged out");

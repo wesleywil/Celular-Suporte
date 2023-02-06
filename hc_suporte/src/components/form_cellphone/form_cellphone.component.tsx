@@ -19,7 +19,7 @@ interface CustomForm extends HTMLFormElement {
 
 const FormCellphone = () => {
   const navigate = useNavigate();
-  const user_id = useSelector((state: RootState) => state.account.user_id);
+  const user_id = useSelector((state: RootState) => state.account.uid);
 
   useEffect(() => {}, [user_id]);
 

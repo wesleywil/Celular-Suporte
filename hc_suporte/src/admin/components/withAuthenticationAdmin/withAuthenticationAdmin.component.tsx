@@ -8,7 +8,7 @@ function WithAuthenticationAdmin<T>(
   Component: ComponentType<T>,
   hocProps?: any
 ) {
-  const user_id = useSelector((state: RootState) => state.account.user_id);
+  const user_id = useSelector((state: RootState) => state.account.uid);
   const admin = useSelector((state: RootState) => state.account.admin);
   useEffect(() => {
     console.log("AAAAAH=> ", admin);

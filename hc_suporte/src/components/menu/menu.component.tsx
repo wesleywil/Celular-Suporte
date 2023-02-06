@@ -7,7 +7,7 @@ import { handleLogout } from "../../firebase/user/user_config";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Menu = () => {
-  const user_id = useSelector((state: RootState) => state.account.user_id);
+  const user_id = useSelector((state: RootState) => state.account.uid);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     console.log("MENUUSER ID=> ", user_id);

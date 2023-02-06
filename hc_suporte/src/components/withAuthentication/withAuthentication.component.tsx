@@ -6,7 +6,7 @@ import { useEffect, ComponentType } from "react";
 import Loading from "../../admin/components/loading/loading.component";
 
 function WithAuthentication<T>(Component: ComponentType<T>, hocProps?: any) {
-  const user_id = useSelector((state: RootState) => state.account.user_id);
+  const user_id = useSelector((state: RootState) => state.account.uid);
   const admin = useSelector((state: RootState) => state.account.admin);
   useEffect(() => {}, [user_id]);
   if (admin === "idle") {

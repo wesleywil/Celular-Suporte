@@ -1,13 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface AccountState {
-  user_id: string;
+  address: string;
   admin: string;
+  cellphone: string;
+  city: string;
+  displayName: string;
+  district: string;
+  email: string;
+  state: string;
+  zip_code: string;
+  uid: string;
 }
 
 const initialState: AccountState = {
-  user_id: "",
+  address: "",
   admin: "idle" || "false" || "true",
+  cellphone: "",
+  city: "",
+  displayName: "",
+  district: "",
+  email: "",
+  state: "",
+  zip_code: "",
+  uid: "",
 };
 
 export const accountSlice = createSlice({
@@ -15,10 +31,15 @@ export const accountSlice = createSlice({
   initialState,
   reducers: {
     set_user_id: (state, { payload }) => {
-      state.user_id = payload;
+      state.uid = payload;
     },
     clean_user_id: (state) => {
-      state.user_id = "";
+      state.uid = "";
+    },
+    set_user: (state, { payload }) => {
+      return {
+        ...(state = payload),
+      };
     },
     set_admin: (state, { payload }) => {
       state.admin = payload;
@@ -26,6 +47,7 @@ export const accountSlice = createSlice({
   },
 });
 
-export const { set_user_id, clean_user_id, set_admin } = accountSlice.actions;
+export const { set_user_id, clean_user_id, set_user, set_admin } =
+  accountSlice.actions;
 
 export default accountSlice.reducer;
