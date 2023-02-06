@@ -4,9 +4,15 @@ type ServiceOrderListProps = {
   name: string;
   color: string;
   qtd: number;
+  action: any;
 };
 
-const ServiceOrderList = ({ name, color, qtd }: ServiceOrderListProps) => {
+const ServiceOrderList = ({
+  name,
+  color,
+  qtd,
+  action,
+}: ServiceOrderListProps) => {
   useEffect(() => {}, [color]);
   return (
     <div className={`text-xl text-center rounded-xl border ` + color}>
@@ -17,7 +23,10 @@ const ServiceOrderList = ({ name, color, qtd }: ServiceOrderListProps) => {
       </h1>
 
       <div>
-        <button className="text-base mb-2 font-semibold px-2 bg-[#4b9978] text-white active:opacity-70 rounded">
+        <button
+          onClick={action}
+          className="text-base mb-2 font-semibold px-2 bg-[#4b9978] text-white active:opacity-70 rounded"
+        >
           Mais detalhes
         </button>
       </div>
