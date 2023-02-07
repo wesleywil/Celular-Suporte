@@ -1,19 +1,58 @@
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../redux/store";
 import { switch_problem_details_view } from "../../redux/client/client";
+import {
+  set_selected_problems,
+  set_open_problems,
+  set_inProgress_problems,
+  set_closed_problems,
+  set_denied_problems,
+} from "../../redux/problems/problems";
+import { listProblemsByUidAndStatus } from "../../firebase/problem/problem_config";
 
 import Menu from "../../components/menu/menu.component";
 import ServiceOrderList from "../../components/service_order_list/service_order_list.component";
 import ServiceOrderListDetails from "../../components/service_order_list_details/service_order_list_details.component";
 
 const ServiceOrders = () => {
+  const uid = useSelector((state: RootState) => state.account.uid);
   const hide_order_list = useSelector(
     (state: RootState) => state.client.problem_details_hidden
   );
+  const open = useSelector((state: RootState) => state.problems.open_problems)!;
+  const inProgress = useSelector(
+    (state: RootState) => state.problems.inProgress_problems
+  )!;
+  const closed = useSelector(
+    (state: RootState) => state.problems.closed_problems
+  )!;
+  const denied = useSelector(
+    (state: RootState) => state.problems.denied_problems
+  )!;
+
   const dispatch = useDispatch<AppDispatch>();
-  const handleOrderListView = () => {
+
+  const handleOrderListView = (data: any) => {
     dispatch(switch_problem_details_view());
+    dispatch(set_selected_problems(data));
   };
+
+  useEffect(() => {
+    console.log("Useeffect Service Orders ");
+    listProblemsByUidAndStatus(uid, "open").then((doc) => {
+      dispatch(set_open_problems(doc));
+    });
+    listProblemsByUidAndStatus(uid, "in_progress").then((doc) => {
+      dispatch(set_inProgress_problems(doc));
+    });
+    listProblemsByUidAndStatus(uid, "closed").then((doc) => {
+      dispatch(set_closed_problems(doc));
+    });
+    listProblemsByUidAndStatus(uid, "denied").then((doc) => {
+      dispatch(set_denied_problems(doc));
+    });
+  }, [uid]);
   return (
     <div className="">
       <Menu />
@@ -36,26 +75,26 @@ const ServiceOrders = () => {
             <ServiceOrderList
               name="Em Aberto"
               color="border-gray-200"
-              qtd={2}
-              action={() => handleOrderListView()}
+              qtd={open.length}
+              action={() => handleOrderListView(open)}
             />
             <ServiceOrderList
               name="Em Andamento"
               color="border-yellow-600"
-              qtd={0}
-              action={() => handleOrderListView()}
+              qtd={inProgress.length}
+              action={() => handleOrderListView(inProgress)}
             />
             <ServiceOrderList
               name="Finalizados"
               color="border-green-600	"
-              qtd={3}
-              action={() => handleOrderListView()}
+              qtd={closed.length}
+              action={() => handleOrderListView(closed)}
             />
             <ServiceOrderList
               name="Recusados"
               color="border-red-600"
-              qtd={0}
-              action={() => handleOrderListView()}
+              qtd={denied.length}
+              action={() => handleOrderListView(denied)}
             />
           </div>
         </div>

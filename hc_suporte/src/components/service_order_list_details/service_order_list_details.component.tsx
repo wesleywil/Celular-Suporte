@@ -1,9 +1,12 @@
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../redux/store";
 import { switch_problem_details_view } from "../../redux/client/client";
 import ServiceOrderItem from "../service_order_item/service_order_item.component";
 
 const ServiceOrderListDetails = () => {
+  const problems = useSelector(
+    (state: RootState) => state.problems.selected_problems
+  );
   const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="centered z-10 w-11/12 max-h-screen pb-4 bg-[#0a191e]/60 backdrop-blur-sm	 border border-[#d9b55d] overflow-x-hidden overflow-y-auto rounded-xl ">
@@ -17,8 +20,11 @@ const ServiceOrderListDetails = () => {
         </button>
       </div>
       <div className="flex flex-col gap-2">
-        <ServiceOrderItem />
-        <ServiceOrderItem />
+        {problems?.length ? (
+          problems?.map((item, i) => <ServiceOrderItem key={i} />)
+        ) : (
+          <h1 className="text-center text-white">NADA REGISTRADO</h1>
+        )}
       </div>
     </div>
   );
