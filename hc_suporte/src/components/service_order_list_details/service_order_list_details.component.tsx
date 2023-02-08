@@ -21,7 +21,14 @@ const ServiceOrderListDetails = () => {
       </div>
       <div className="flex flex-col gap-2">
         {problems?.length ? (
-          problems?.map((item, i) => <ServiceOrderItem key={i} />)
+          problems?.map((item, i) => (
+            <ServiceOrderItem
+              key={i}
+              cellphone={item.cellphone}
+              created_at={item.created_at}
+              problem={item.problem}
+            />
+          ))
         ) : (
           <h1 className="text-center text-white">NADA REGISTRADO</h1>
         )}
