@@ -33,8 +33,10 @@ export const accountSlice = createSlice({
     set_user_id: (state, { payload }) => {
       state.uid = payload;
     },
-    clean_user_id: (state) => {
-      state.uid = "";
+    clean_user: () => {
+      return {
+        ...initialState,
+      };
     },
     set_user: (state, { payload }) => {
       return {
@@ -47,7 +49,7 @@ export const accountSlice = createSlice({
   },
 });
 
-export const { set_user_id, clean_user_id, set_user, set_admin } =
+export const { set_user_id, clean_user, set_user, set_admin } =
   accountSlice.actions;
 
 export default accountSlice.reducer;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../redux/store";
-import { clean_user_id } from "../../redux/account/account";
+import { clean_user } from "../../redux/account/account";
 import { Link } from "react-router-dom";
 import { handleLogout } from "../../firebase/user/user_config";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -13,7 +13,7 @@ const Menu = () => {
     console.log("MENUUSER ID=> ", user_id);
   }, [user_id]);
   const logout = () => {
-    dispatch(clean_user_id());
+    dispatch(clean_user());
     handleLogout();
   };
   const handleMenu = () => {
