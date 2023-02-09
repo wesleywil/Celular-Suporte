@@ -26,9 +26,10 @@ export const handleSignUp = async(data:any) =>{
 export const handleSignIn = async(data:any)=>{
     try{
         const result = await signInWithEmailAndPassword(auth, data.email, data.password)
-        console.log('usuario logado é => ', result.user)
+        return result
     }catch(error:any){
-        console.log('CODE: ', error.code + " MESSAGE: ", error.message); 
+        console.log('CODE: ', error.code + " MESSAGE: ", error.message);
+        return {error_code:error.code, error_message:error.message};
     }
     
 }

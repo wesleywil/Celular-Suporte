@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import FormButton from "../form_button/form_button.component";
 import { handleSignIn } from "../../firebase/user/user_config";
 
@@ -11,6 +13,12 @@ interface CustomForm extends HTMLFormElement {
 }
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    console.log("Message Login Useeefect");
+  }, [message]);
   const handleSubmit = (e: React.FormEvent<CustomForm>) => {
     e.preventDefault();
     console.log("Loging...");
@@ -20,7 +28,14 @@ const SignIn = () => {
       email: target.email.value,
       password: target.password.value,
     };
-    handleSignIn(data);
+    handleSignIn(data).then((data: any) => {
+      console.log("Data=> ", data);
+      if (data.hasOwnProperty("error_code")) {
+        setMessage("Um erro ocorreu! Verifique as informações");
+      } else {
+        navigate("/");
+      }
+    });
   };
   return (
     <div className="self-center mt-2 p-4 text-3xl text-[#d9b55d]">
@@ -41,6 +56,7 @@ const SignIn = () => {
           placeholder="Senha"
           className="rounded-xl px-2"
         />
+        <h1 className="text-white text-center">{message}</h1>
         <div className="flex gap-2 justify-center mt-2">
           <FormButton name="Logar" type="submit" />
           <FormButton name="Cancelar" type="button" />
