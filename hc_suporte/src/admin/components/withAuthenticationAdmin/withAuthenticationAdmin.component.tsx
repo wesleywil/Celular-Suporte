@@ -11,26 +11,16 @@ function WithAuthenticationAdmin<T>(
   const user_id = useSelector((state: RootState) => state.account.uid);
   const admin = useSelector((state: RootState) => state.account.admin);
   useEffect(() => {
-    console.log("AAAAAH=> ", admin);
-  }, [user_id, admin]);
-  if (admin === "idle") {
-    return (
-      <div className="h-screen">
-        <div className="h-full flex flex-col items-center justify-center">
-          <div className="self-center">
-            <Loading />
-          </div>
-          <h1 className="text-white">Carregando...</h1>
-        </div>
-      </div>
-    );
+    console.log("ADMIN DENTRO DO WITH AUTHENTICATION=> ", admin);
+  }, [user_id]);
+  if (user_id === "idle") {
+    return <Loading />;
   } else {
-    if (user_id !== "" && admin === "true") {
+    if (user_id !== "" && admin) {
       return <Component {...hocProps} />;
     } else {
       return <Navigate to="/logar" replace={true} />;
     }
   }
 }
-
 export default WithAuthenticationAdmin;

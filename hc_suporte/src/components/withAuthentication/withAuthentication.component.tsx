@@ -9,21 +9,12 @@ function WithAuthentication<T>(Component: ComponentType<T>, hocProps?: any) {
   const user_id = useSelector((state: RootState) => state.account.uid);
   const admin = useSelector((state: RootState) => state.account.admin);
   useEffect(() => {}, [user_id]);
-  if (user_id === "") {
-    return <Navigate to="/logar" replace={true} />;
+  if (user_id === "idle") {
+    return <Loading />;
   } else {
     if (user_id !== "") {
       if (admin === "idle") {
-        return (
-          <div className="h-screen">
-            <div className="h-full flex flex-col items-center justify-center">
-              <div className="self-center">
-                <Loading />
-              </div>
-              <h1 className="text-white">Carregando...</h1>
-            </div>
-          </div>
-        );
+        return <Loading />;
       } else {
         return <Component {...hocProps} />;
       }
