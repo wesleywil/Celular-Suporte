@@ -23,7 +23,7 @@ const initialState: AccountState = {
   email: "",
   state: "",
   zip_code: "",
-  uid: "",
+  uid: "idle" || "",
 };
 
 export const accountSlice = createSlice({
