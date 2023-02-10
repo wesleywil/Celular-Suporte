@@ -7,6 +7,8 @@ import HomepageButton from "../../components/homepage_button/homepage_button.com
 import Menu from "../../components/menu/menu.component";
 import { useEffect } from "react";
 
+import Logo from "../../assets/logo.png";
+
 const Homepage = () => {
   const user_id = useSelector((state: RootState) => state.account.uid);
   const dispatch = useDispatch<AppDispatch>();
@@ -30,11 +32,7 @@ const Homepage = () => {
           </h2>
         </div>
 
-        <img
-          src="https://dummyimage.com/250x250"
-          alt="company's logo"
-          className="mt-8 p-2 rounded-full"
-        />
+        <img src={Logo} alt="company's logo" className="mt-8 mb-4" />
         <div className="w-2/3 flex flex-col gap-2 items-center ">
           {user_id === "" ? (
             <>

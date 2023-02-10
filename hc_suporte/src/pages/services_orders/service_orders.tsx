@@ -15,6 +15,8 @@ import Menu from "../../components/menu/menu.component";
 import ServiceOrderList from "../../components/service_order_list/service_order_list.component";
 import ServiceOrderListDetails from "../../components/service_order_list_details/service_order_list_details.component";
 
+import Logo from "../../assets/logo.png";
+
 const ServiceOrders = () => {
   const uid = useSelector((state: RootState) => state.account.uid);
   const hide_order_list = useSelector(
@@ -61,11 +63,7 @@ const ServiceOrders = () => {
 
         <div className="w-full self-center mt-2 p-4 text-3xl text-[#d9b55d] ">
           <div className="flex flex-col items-center justify-center">
-            <img
-              src="https:dummyimage.com/100x100"
-              alt=""
-              className="rounded-full"
-            />
+            <img src={Logo} alt="logo da empresa" className="w-24" />
             <h4 className="mb-2 text-base text-white">Nome do cliente</h4>
           </div>
           <h1 className="text-center mb-2 pb-2 border-b-2 border-[#d9b55d]">
