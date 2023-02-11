@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../../redux/store";
 import { switch_client_list_view } from "../../../redux/admin/admin";
+import { getAllUsers } from "../../../firebase/user/user_config";
 
 import InfoItem from "../../components/info_item/info_item.component";
 import ItemList from "../../components/item_list/item_list.component";
@@ -16,6 +18,18 @@ const Clients = () => {
     (state: RootState) => state.admin.client_info_hidden
   );
   const dispatch = useDispatch<AppDispatch>();
+
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    console.log("GET ALL USERS");
+    if (list_view_hidden) {
+      getAllUsers().then((data) => {
+        setClients(data);
+      });
+    }
+  }, [list_view_hidden]);
+
   return (
     <div className="min-h-full h-screen p-2">
       <AdminMenu />
@@ -28,10 +42,11 @@ const Clients = () => {
           title="Lista de Clientes"
           action={() => dispatch(switch_client_list_view())}
         >
-          <ClientItem />
-          <ClientItem />
-          <ClientItem />
-          <ClientItem />
+          {clients.length
+            ? clients.map((item: any, i: number) => (
+                <ClientItem key={i} data={item} />
+              ))
+            : ""}
         </ItemList>
       )}
 
@@ -41,12 +56,7 @@ const Clients = () => {
       <div className="h-5/6 flex flex-col gap-4  justify-center items-center">
         <InfoItem
           title="Clientes Cadastrados"
-          quantity={30}
-          action={() => dispatch(switch_client_list_view())}
-        />
-        <InfoItem
-          title="Clientes com Serviços"
-          quantity={10}
+          quantity={clients.length}
           action={() => dispatch(switch_client_list_view())}
         />
       </div>
