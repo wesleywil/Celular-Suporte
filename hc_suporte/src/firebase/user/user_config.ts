@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore/lite";
+import { doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore/lite";
 
 import { db } from "../firebase.utils";
 import { auth } from "../firebase.utils";
@@ -53,3 +53,12 @@ export const getUserInfo = async(uid:string)=>{
     }
 }
 
+export const getAllUsers = async()=>{
+    const docRef = collection(db, "users");
+    const docSnap = await getDocs(docRef);
+    let data:any = [];
+    docSnap.forEach((doc)=>{
+        data.push(doc.data())
+    })
+    return data;
+}
