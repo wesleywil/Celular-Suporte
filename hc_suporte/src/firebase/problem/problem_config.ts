@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore/lite";
+import { addDoc, collection, getDoc, getDocs, query, where } from "firebase/firestore/lite";
 
 import { db } from "../firebase.utils";
 
@@ -33,6 +33,16 @@ export const listProblemsByUidAndStatus = async(uid:string, status:string)=>{
     where("uid", "==", uid),
     where("status", "==", status),
     );
+    const docsSnap = await getDocs(q);
+    let data:any = [];
+    docsSnap.forEach((doc)=>{
+        data.push(doc.data())
+    })
+    return data;
+}
+
+export const listProblemsByStatus = async(status:string)=>{
+    const q = query(collection(db, "problems"), where("status", "==", status));
     const docsSnap = await getDocs(q);
     let data:any = [];
     docsSnap.forEach((doc)=>{
