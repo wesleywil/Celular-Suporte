@@ -24,11 +24,7 @@ const ListOfServices = () => {
         >
           {problems!.length
             ? problems?.map((item: any, i: number) => (
-                <ServiceItem
-                  key={i}
-                  created_at={item.created_at}
-                  cellphone={item.cellphone}
-                />
+                <ServiceItem key={i} data={item} />
               ))
             : ""}
         </ItemList>
