@@ -9,6 +9,7 @@ interface Problem {
 }
 
 export interface ProblemsState {
+  selected_problem?: Problem;
   selected_problems?: Array<Problem>;
   open_problems?: Array<Problem>;
   inProgress_problems?: Array<Problem>;
@@ -17,6 +18,13 @@ export interface ProblemsState {
 }
 
 const initialState: ProblemsState = {
+  selected_problem: {
+    cellphone: "",
+    created_at: "",
+    problem: "",
+    status: "",
+    uid: "",
+  },
   selected_problems: [],
   open_problems: [],
   inProgress_problems: [],
@@ -28,6 +36,9 @@ export const problemsSlice = createSlice({
   name: "problems",
   initialState,
   reducers: {
+    set_selected_problem: (state, { payload }) => {
+      state.selected_problem = payload;
+    },
     set_selected_problems: (state, { payload }) => {
       state.selected_problems = payload;
     },
@@ -47,6 +58,7 @@ export const problemsSlice = createSlice({
 });
 
 export const {
+  set_selected_problem,
   set_selected_problems,
   set_open_problems,
   set_inProgress_problems,
