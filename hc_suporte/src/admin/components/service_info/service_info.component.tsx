@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../redux/store";
 import { switch_service_info_view } from "../../../redux/admin/admin";
 import { getUserInfo } from "../../../firebase/user/user_config";
+import { updateStatusProblem } from "../../../firebase/problem/problem_config";
 
 import { convertDate } from "../../../utils/utils";
 
@@ -19,6 +20,23 @@ const ServiceInfo = () => {
     cellphone: "",
     email: "",
   });
+  const [checkbox, setCheckbox] = useState(false);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckbox(event.target.checked);
+  };
+
+  const handleUpdateProblem = () => {
+    if (checkbox) {
+      updateStatusProblem(selected_problem, "in_progress").then(() => {
+        location.reload();
+      });
+    } else {
+      updateStatusProblem(selected_problem, "denied").then(() => {
+        location.reload();
+      });
+    }
+  };
 
   useEffect(() => {
     console.log("service info admin");
@@ -47,6 +65,7 @@ const ServiceInfo = () => {
           <label className="flex flex-col gap-2 items-center">
             <span className="self-center">Recusar/Aceitar</span>
             <input
+              onChange={handleCheckboxChange}
               type="checkbox"
               className="self-center toggle toggle-success"
             />
@@ -68,7 +87,10 @@ const ServiceInfo = () => {
           <p className="text-base">{selected_problem?.problem}</p>
         </div>
         <div className="flex justify-center">
-          <button className="bg-[#4b9978] active:opacity-70 text-2xl px-2 font-bold rounded-xl">
+          <button
+            onClick={() => handleUpdateProblem()}
+            className="bg-[#4b9978] active:opacity-70 text-2xl px-2 font-bold rounded-xl"
+          >
             Confirmar
           </button>
         </div>

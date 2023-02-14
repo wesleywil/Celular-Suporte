@@ -1,4 +1,4 @@
-import { addDoc, collection, getDoc, getDocs, query, where } from "firebase/firestore/lite";
+import { doc, addDoc, collection, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore/lite";
 
 import { db } from "../firebase.utils";
 
@@ -13,6 +13,19 @@ export const registerProblem = async(data:any)=>{
         console.log('Document Writen with ID=> ', proRef.id)
     }catch(error:any){
         console.log("ERROR CODE: ", error.code + "ERROR MESSAGE: ", error.message)
+    }
+}
+
+export const updateStatusProblem = async(data:any, status:string)=>{
+    console.log('WHATS PASSING=> ', data, "STATUS => ", status)
+    try{
+       const proRef = doc(db, "problems", data.id);
+       await updateDoc(proRef, {
+        ...data,
+        status:status
+       })
+    }catch(error:any){
+        console.log('error code: ', error.code + "- error message:", error.message)
     }
 }
 
@@ -46,7 +59,10 @@ export const listProblemsByStatus = async(status:string)=>{
     const docsSnap = await getDocs(q);
     let data:any = [];
     docsSnap.forEach((doc)=>{
-        data.push(doc.data())
+        data.push({
+            id:doc.id,
+            ...doc.data(),
+        })
     })
     return data;
 }
