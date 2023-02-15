@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../redux/store";
 import { switch_service_info_view } from "../../../redux/admin/admin";
@@ -6,6 +6,7 @@ import { getUserInfo } from "../../../firebase/user/user_config";
 import { updateStatusProblem } from "../../../firebase/problem/problem_config";
 
 import { convertDate } from "../../../utils/utils";
+import ServiceInfoCheckbox from "../service_info_checkbox/service_info_checkbox.component";
 
 const ServiceInfo = () => {
   const selected_problem = useSelector(
@@ -27,14 +28,22 @@ const ServiceInfo = () => {
   };
 
   const handleUpdateProblem = () => {
-    if (checkbox) {
-      updateStatusProblem(selected_problem, "in_progress").then(() => {
-        location.reload();
-      });
-    } else {
-      updateStatusProblem(selected_problem, "denied").then(() => {
-        location.reload();
-      });
+    if (selected_problem!.status === "open") {
+      if (checkbox) {
+        updateStatusProblem(selected_problem, "in_progress").then(() => {
+          location.reload();
+        });
+      } else {
+        updateStatusProblem(selected_problem, "denied").then(() => {
+          location.reload();
+        });
+      }
+    } else if (selected_problem!.status === "in_progress") {
+      if (checkbox) {
+        updateStatusProblem(selected_problem, "closed").then(() => {
+          location.reload();
+        });
+      }
     }
   };
 
@@ -61,17 +70,10 @@ const ServiceInfo = () => {
           <h1 className="text-3xl font-semibold">Data Agendada</h1>
           <h2>{convertedDate}</h2>
         </div>
-        <div className="form-control border-2 border-[#d9b55d] w-full p-2 rounded-xl">
-          <label className="flex flex-col gap-2 items-center">
-            <span className="self-center">Recusar/Aceitar</span>
-            <input
-              onChange={handleCheckboxChange}
-              type="checkbox"
-              className="self-center toggle toggle-success"
-            />
-          </label>
-        </div>
-
+        <ServiceInfoCheckbox
+          action={handleCheckboxChange}
+          status={selected_problem!.status}
+        />
         <div className="text-center">
           <h1 className="text-3xl font-semibold">Cliente</h1>
           <h2>{client.displayName}</h2>
