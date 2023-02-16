@@ -21,6 +21,7 @@ import Services from "./admin/pages/services/services";
 // Components
 import WithAuthentication from "./components/withAuthentication/withAuthentication.component";
 import WithAuthenticationAdmin from "./admin/components/withAuthenticationAdmin/withAuthenticationAdmin.component";
+import WithLogin from "./components/withLogin/withLogin.component";
 import NotFound from "./pages/not_found/not_found";
 
 function App() {
@@ -45,7 +46,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/logar" element={<SignInAndSignUp signIn={true} />} />
+          <Route
+            path="/logar"
+            element={WithLogin(SignInAndSignUp, { signIn: true })}
+          />
           <Route
             path="/criar_conta"
             element={<SignInAndSignUp signIn={false} />}
