@@ -18,7 +18,7 @@ import ServiceOrderListDetails from "../../components/service_order_list_details
 import Logo from "../../assets/logo.png";
 
 const ServiceOrders = () => {
-  const uid = useSelector((state: RootState) => state.account.uid);
+  const userInfo = useSelector((state: RootState) => state.account);
   const hide_order_list = useSelector(
     (state: RootState) => state.client.problem_details_hidden
   );
@@ -42,21 +42,21 @@ const ServiceOrders = () => {
 
   useEffect(() => {
     console.log("Useeffect Service Orders ");
-    listProblemsByUidAndStatus(uid, "open").then((doc) => {
+    listProblemsByUidAndStatus(userInfo.uid, "open").then((doc) => {
       dispatch(set_open_problems(doc));
     });
-    listProblemsByUidAndStatus(uid, "in_progress").then((doc) => {
+    listProblemsByUidAndStatus(userInfo.uid, "in_progress").then((doc) => {
       dispatch(set_inProgress_problems(doc));
     });
-    listProblemsByUidAndStatus(uid, "closed").then((doc) => {
+    listProblemsByUidAndStatus(userInfo.uid, "closed").then((doc) => {
       dispatch(set_closed_problems(doc));
     });
-    listProblemsByUidAndStatus(uid, "denied").then((doc) => {
+    listProblemsByUidAndStatus(userInfo.uid, "denied").then((doc) => {
       dispatch(set_denied_problems(doc));
     });
-  }, [uid]);
+  }, [userInfo]);
   return (
-    <div className="">
+    <div className="size_window">
       <Menu />
       <div className="flex justify-center items-center gap-2">
         {!hide_order_list ? <ServiceOrderListDetails /> : ""}
@@ -64,12 +64,14 @@ const ServiceOrders = () => {
         <div className="w-full self-center mt-2 p-4 text-3xl text-[#d9b55d] ">
           <div className="flex flex-col items-center justify-center">
             <img src={Logo} alt="logo da empresa" className="w-24" />
-            <h4 className="mb-2 text-base text-white">Nome do cliente</h4>
+            <h4 className="mb-2 text-base text-white">
+              {userInfo.displayName}
+            </h4>
           </div>
-          <h1 className="text-center mb-2 pb-2 border-b-2 border-[#d9b55d]">
+          <h1 className="xl:w-1/2 xl:mx-auto text-center mb-2 pb-2 border-b-2 border-[#d9b55d]">
             Ordem de Serviços
           </h1>
-          <div className="w-11/12 mx-auto flex flex-col gap-2 ">
+          <div className="w-11/12 xl:w-1/2 mx-auto flex flex-col gap-2 ">
             <ServiceOrderList
               name="Em Aberto"
               color="border-gray-200"

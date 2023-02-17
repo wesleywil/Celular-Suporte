@@ -5,9 +5,9 @@ const RegisterCellphone = () => {
   return (
     <div className="h-screen min-h-full">
       <Menu />
-      <div className="flex justify-center items-center gap-2">
+      <div className="xl:mt-36 flex justify-center items-center gap-2">
         <div className="self-center mt-2 p-4 text-3xl text-[#d9b55d]">
-          <h1 className="text-center mb-2 pb-2 border-b-2 border-[#d9b55d]">
+          <h1 className="xl:w-1/2 xl:mx-auto text-center mb-2 pb-2 border-b-2 border-[#d9b55d]">
             Registrar Celular
           </h1>
           <FormCellphone />

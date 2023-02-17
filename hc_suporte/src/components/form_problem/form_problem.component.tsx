@@ -6,8 +6,6 @@ import { listCellphonesByUserId } from "../../firebase/cellphone/cellphone_confi
 import { registerProblem } from "../../firebase/problem/problem_config";
 
 import FormButton from "../form_button/form_button.component";
-import SelectDay from "../select_day/select_day.component";
-import SelectMonth from "../select_month/select_month.component";
 
 interface CustomElements extends HTMLFormControlsCollection {
   cellphone: HTMLInputElement;
@@ -47,28 +45,25 @@ const FormProblem = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 text-2xl text-black"
+      className="xl:w-1/2 mx-auto text-2xl xl:text-4xl text-black"
     >
-      <label className="text-xl text-[#d9b55d]">Selecione Celular</label>
-      <select name="cellphone" className="rounded-xl px-2">
+      <label className="xl:text-2xl text-xl text-[#d9b55d]">
+        Selecione Celular
+      </label>
+      <select name="cellphone" className="w-full rounded-xl px-2">
         {cellphones.map((data: any, i: number) => (
           <option key={i} defaultValue={data.model}>
             {data.brand} - {data.model}
           </option>
         ))}
       </select>
-      <label className="text-xl text-[#d9b55d]">Problema</label>
+      <label className="xl:text-2xl text-xl text-[#d9b55d]">Problema</label>
       <textarea
         name="problem"
         rows={5}
         placeholder="Ex: a tela esta quebrada, gostaria de troca-la"
-        className="rounded-xl px-2"
+        className="w-full rounded-xl px-2"
       ></textarea>
-      {/* <label className="text-xl text-[#d9b55d]">Reservar Dia</label>
-      <div className="flex gap-4 justify-center">
-        <SelectMonth />
-        <SelectDay />
-      </div> */}
       <div className="flex gap-2 justify-center mt-2">
         <FormButton name="Criar" type="submit" />
         <FormButton name="Cancelar" type="button" />

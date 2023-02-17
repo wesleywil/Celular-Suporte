@@ -9,7 +9,7 @@ const ServiceOrderListDetails = () => {
   );
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <div className="centered z-10 w-11/12 max-h-screen pb-4 bg-[#0a191e]/60 backdrop-blur-sm	 border border-[#d9b55d] overflow-x-hidden overflow-y-auto rounded-xl ">
+    <div className="centered z-10 w-11/12 xl:w-1/2 max-h-screen pb-4 bg-[#0a191e]/60 backdrop-blur-sm	 border border-[#d9b55d] overflow-x-hidden overflow-y-auto rounded-xl ">
       <div className="w-full flex justify-between bg-[#4b9978] mb-2">
         <span className="self-center font-bold pl-2">Detalhes</span>
         <button

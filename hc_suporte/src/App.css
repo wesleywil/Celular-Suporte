@@ -46,3 +46,9 @@
     background-color: #04AA6D;
     color: white;
   }
+
+
+.size_window{
+  max-height:100%;
+  min-height: 100vh;
+}

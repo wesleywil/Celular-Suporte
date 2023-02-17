@@ -21,7 +21,7 @@ const InfoItemContainer = () => {
   };
 
   return (
-    <div className="h-5/6 flex flex-col gap-4 justify-center items-center">
+    <div className="xl:w-1/2 mx-auto h-5/6 flex flex-col gap-4 justify-center items-center">
       <InfoItem
         title="A ser aprovados/recusados"
         quantity={open!.length}

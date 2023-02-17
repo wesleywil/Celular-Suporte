@@ -12,10 +12,10 @@ const SignInAndSignUp = ({ signIn }: SignInAndSignUpProps) => {
     console.log("SignInAndSignUp Effect");
   }, [signIn]);
   return (
-    <div className="h-screen">
+    <div className="size_window">
       <Menu />
       <div className="h-screen flex justify-center items-center gap-2">
-        <div className="flex flex-col">{signIn ? <SignIn /> : <SignUp />}</div>
+        <div className="xl:w-1/3">{signIn ? <SignIn /> : <SignUp />}</div>
       </div>
     </div>
   );

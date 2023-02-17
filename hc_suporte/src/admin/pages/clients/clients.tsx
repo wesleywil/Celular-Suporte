@@ -53,7 +53,7 @@ const Clients = () => {
       <h1 className="text-4xl text-white text-center font-bold pt-2">
         Clientes
       </h1>
-      <div className="h-5/6 flex flex-col gap-4  justify-center items-center">
+      <div className="xl:w-1/2 mx-auto h-5/6 flex flex-col gap-4  justify-center items-center">
         <InfoItem
           title="Clientes Cadastrados"
           quantity={clients.length}

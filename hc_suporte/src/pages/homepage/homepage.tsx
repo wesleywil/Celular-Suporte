@@ -24,9 +24,9 @@ const Homepage = () => {
   return (
     <div className="h-screen w-screen overflow-hidden">
       <Menu />
-      <div className="text-[#d9b55d] font-bold flex flex-col justify-between items-center p-4">
-        <div className="flex flex-col items-center pb-2 border-b-2 border-[#4b9978]">
-          <h1 className="text-8xl ">HC</h1>
+      <div className="xl:mt-48  text-[#d9b55d] font-bold flex flex-col justify-between items-center p-4">
+        <div className=" flex flex-col items-center pb-2 border-b-2 border-[#4b9978]">
+          <h1 className="text-8xl xl:text-9xl ">HC</h1>
           <h2 className="text-4xl text-center font-semibold">
             Suporte Técnico de Celulares
           </h2>
@@ -43,13 +43,13 @@ const Homepage = () => {
           ) : (
             <button
               onClick={logout}
-              className="w-full text-2xl  py-1 bg-[#d9b55d] active:bg-[#4b9978] text-[#0a191e] active:text-[#d9b55d] rounded-xl transform duration-200 ease-in-out"
+              className="w-full xl:w-1/3 text-2xl  py-1 bg-[#d9b55d] active:bg-[#4b9978] text-[#0a191e] active:text-[#d9b55d] rounded-xl transform duration-200 ease-in-out"
             >
               Deslogar
             </button>
           )}
         </div>
-        <div className="w-full mt-2 border-b-2 border-b-2 border-[#4b9978]"></div>
+        <div className="w-full xl:w-1/4 mt-2 border-b-2 border-b-2 border-[#4b9978]"></div>
       </div>
     </div>
   );
