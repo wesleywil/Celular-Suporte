@@ -13,9 +13,7 @@ const Homepage = () => {
   const user_id = useSelector((state: RootState) => state.account.uid);
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    console.log("Homepage useeffect");
-  }, [user_id]);
+  useEffect(() => {}, [user_id]);
 
   const logout = () => {
     dispatch(clean_user());

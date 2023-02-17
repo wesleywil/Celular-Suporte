@@ -16,12 +16,10 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    console.log("Message Login Useeefect");
-  }, [message]);
+  useEffect(() => {}, [message]);
   const handleSubmit = (e: React.FormEvent<CustomForm>) => {
     e.preventDefault();
-    console.log("Loging...");
+
     const target = e.currentTarget.elements;
 
     const data = {
@@ -29,7 +27,6 @@ const SignIn = () => {
       password: target.password.value,
     };
     handleSignIn(data).then((data: any) => {
-      console.log("Data=> ", data);
       if (data.hasOwnProperty("error_code")) {
         setMessage("Um erro ocorreu! Verifique as informações");
       } else {

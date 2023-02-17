@@ -12,7 +12,6 @@ const ClientInfo = () => {
   const [cellphones, setCellphones] = useState([]);
 
   useEffect(() => {
-    console.log("Client Info Get Cellphones");
     listCellphonesByUserId(data.uid).then((cellData) => {
       setCellphones(cellData);
     });

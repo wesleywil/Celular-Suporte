@@ -24,14 +24,13 @@ const FormProblem = () => {
 
   useEffect(() => {
     listCellphonesByUserId(user_id).then((doc) => {
-      console.log(doc);
       setCellphones(doc);
     });
   }, [user_id]);
 
   const handleSubmit = (e: React.FormEvent<CustomForm>) => {
     e.preventDefault();
-    console.log("Creating new problem register");
+
     const target = e.currentTarget.elements;
 
     const data = {

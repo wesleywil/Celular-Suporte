@@ -8,9 +8,7 @@ type SignInAndSignUpProps = {
 };
 
 const SignInAndSignUp = ({ signIn }: SignInAndSignUpProps) => {
-  useEffect(() => {
-    console.log("SignInAndSignUp Effect");
-  }, [signIn]);
+  useEffect(() => {}, [signIn]);
   return (
     <div className="size_window">
       <Menu />

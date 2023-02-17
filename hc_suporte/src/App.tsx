@@ -30,13 +30,10 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("USER ID =>", user.uid);
         getUserInfo(user.uid).then((data) => {
-          console.log("ADMIN ==> ", data?.admin);
           dispatch(set_user(data));
         });
       } else {
-        console.log("user is logged out");
         dispatch(set_user_id(""));
       }
     });

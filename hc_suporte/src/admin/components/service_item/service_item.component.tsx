@@ -22,9 +22,7 @@ const ServiceItem = ({ data }: ServiceItemProps) => {
     dispatch(set_selected_problem(item));
   };
 
-  useEffect(() => {
-    console.log("Date Useeffect");
-  }, [date]);
+  useEffect(() => {}, [date]);
 
   return (
     <div className="flex gap-4 justify-between bg-[#4b9978] px-1 py-2 rounded-xl">

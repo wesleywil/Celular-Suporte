@@ -9,9 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const Menu = () => {
   const user_id = useSelector((state: RootState) => state.account.uid);
   const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    console.log("MENUUSER ID=> ", user_id);
-  }, [user_id]);
+  useEffect(() => {}, [user_id]);
   const logout = () => {
     dispatch(clean_user());
     handleLogout();

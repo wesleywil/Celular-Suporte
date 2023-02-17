@@ -41,7 +41,6 @@ const ServiceOrders = () => {
   };
 
   useEffect(() => {
-    console.log("Useeffect Service Orders ");
     listProblemsByUidAndStatus(userInfo.uid, "open").then((doc) => {
       dispatch(set_open_problems(doc));
     });

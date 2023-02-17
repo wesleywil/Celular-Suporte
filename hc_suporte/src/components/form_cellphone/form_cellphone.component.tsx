@@ -25,7 +25,7 @@ const FormCellphone = () => {
 
   const handleSubmit = (e: React.FormEvent<CustomForm>) => {
     e.preventDefault();
-    console.log("Creating new cellphone register");
+
     const target = e.currentTarget.elements;
 
     const data = {

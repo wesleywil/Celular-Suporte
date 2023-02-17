@@ -48,7 +48,6 @@ const ServiceInfo = () => {
   };
 
   useEffect(() => {
-    console.log("service info admin");
     getUserInfo(selected_problem!.uid).then((data: any) => {
       setClient(data);
     });

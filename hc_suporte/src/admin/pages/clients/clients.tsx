@@ -22,7 +22,6 @@ const Clients = () => {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    console.log("GET ALL USERS");
     if (list_view_hidden) {
       getAllUsers().then((data) => {
         setClients(data);

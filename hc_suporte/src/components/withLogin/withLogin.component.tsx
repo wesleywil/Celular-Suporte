@@ -8,9 +8,7 @@ import Loading from "../../admin/components/loading/loading.component";
 function WithLogin<T>(Component: ComponentType<T>, hocProps?: any) {
   const user_id = useSelector((state: RootState) => state.account.uid);
 
-  useEffect(() => {
-    console.log("user id=> ", user_id);
-  }, [user_id]);
+  useEffect(() => {}, [user_id]);
 
   if (user_id === "idle") {
     return <Loading />;

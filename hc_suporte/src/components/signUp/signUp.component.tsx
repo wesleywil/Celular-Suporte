@@ -24,7 +24,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<CustomForm>) => {
     e.preventDefault();
-    console.log("Creating new User");
+
     const target = e.currentTarget.elements;
 
     if (target.password.value !== target.password2.value) {

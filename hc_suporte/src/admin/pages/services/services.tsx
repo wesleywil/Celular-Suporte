@@ -20,7 +20,6 @@ const Services = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    console.log("Useeffect Problems Admin ");
     listProblemsByStatus("open").then((data) => {
       dispatch(set_open_problems(data));
     });

@@ -12,9 +12,7 @@ function WithAuthenticationAdmin<T>(
 ) {
   const user_id = useSelector((state: RootState) => state.account.uid);
   const admin = useSelector((state: RootState) => state.account.admin);
-  useEffect(() => {
-    console.log("ADMIN DENTRO DO WITH AUTHENTICATION=> ", admin);
-  }, [user_id]);
+  useEffect(() => {}, [user_id]);
   if (user_id === "idle") {
     return <Loading />;
   } else {
